@@ -22,14 +22,15 @@ public class Batalha {
             atirar(tiro);
             tentativas++;
 
+            boolean ehAcerto = acertou(tiro, navio);
 
-                if (acertou(tiro, navio)) {
+
+                if (ehAcerto) {
                     acertos++;
-                    alteraTabuleiro(tiro, navio, tabuleiro);
                 } else {
-                    alteraTabuleiro(tiro, navio, tabuleiro);
                     resumo(tiro, navio, tentativas);
                 }
+            alteraTabuleiro(tiro, navio, tabuleiro, ehAcerto);
 
         } while (acertos < 3);
         System.out.println("Parabéns, Você venceu! Acertou os 3 navios com " + tentativas + " tentativas.");
@@ -122,8 +123,8 @@ public class Batalha {
         System.out.printf("\nJá foram %d tentativas! Dica:\nNa linha %d -> tem %d navio(s)\n" + "Na coluna %d -> tem %d navio(s)\n", tentativa, tiro[0] + 1, linha, tiro[1] + 1, coluna);
     }
 
-    public static void alteraTabuleiro(int[] tiro, int[][] navios, int[][] tabuleiro) {
-        if (acertou(tiro, navios))
+    public static void alteraTabuleiro(int[] tiro, int[][] navios, int[][] tabuleiro, boolean ehAcerto) {
+        if (ehAcerto)
             tabuleiro[tiro[0]][tiro[1]] = 1;
         else
             tabuleiro[tiro[0]][tiro[1]] = 0;
